@@ -1,0 +1,132 @@
+﻿@using eTicaretProje.Entity
+@model Product
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/mvc/css/jquery.rateyo.css" />
+<script src="jquery.js"></script>
+<script src="/mvc/js/jquery.rateyo.js"></script>
+
+<div id="product-details" class="container pb-5">
+    <div class="row">
+
+        <div class="col-md-6">
+            <img src="/Upload/@Model.Image" class="img-fluid rounded ">
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Name</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    @if (Model.IsApproved)
+                    {
+                        <span class="badge badge-primary">Stokta</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Stokta Yok</span>
+                    }
+
+                    <span class="product-number">#2365656</span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div id="description" class="readmore">
+                        @Model.Description
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-10">
+                    @*<i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    *@
+                    @if (Model.Rating == 0)
+                    {
+
+
+                        <p>
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            Değerlendirme yapılmadı
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            Ürün Puanı:@Model.Rating
+                        </p>
+                    }
+
+                    @*<span class="badge badge-success">53</span>*@
+                
+                </div>
+                <div class="container-md-10">
+                    <div id="write-review" class="col-md-3">
+                        <a href="/Comment/Index/@Model.Id">
+                                     Write a review
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h4 id="product-price">@Model.Price TL</h4>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.HiddenFor(i => i.Id)
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                            Add To Cart
+                        </button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pb-5">
+        @Html.Action("GetComments", "Comment", new { id = Model.Id })
+    </div>
+
+
+</div>
+@*<script>
+        $(function () {
+
+            $("#rateYo").rateYo({
+
+                rating: 0,
+                numStars: 5,
+                maxValue: 5,
+                spacing: "5px",
+                multiColor: {
+
+                    "startColor": "#FF0000", //RED
+                    "endColor": "#00FF00"  //GREEN
+                },
+                onChange: function (rating, rateYoInstance) {
+                    $("#rating").val{ rating };
+
+
+                }
+            });
+
+        });
+    </script>
+*@

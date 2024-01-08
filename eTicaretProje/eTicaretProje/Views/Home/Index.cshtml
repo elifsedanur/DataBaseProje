@@ -1,0 +1,41 @@
+﻿@using eTicaretProje.Models
+@model IEnumerable<ProductModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="carousel carousel-fade w-100 " data-ride="carousel" id="slider4">
+    <div class="carousel-indicators">
+        <button type="submit" data-target="#slider4" data-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="submit" data-target="#slider4" data-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-interval="10">
+            <img src="~/Upload/slider1.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Hepsi Burada</h5>
+                <p>Yüzlerde ürün burada.</p>
+            </div>
+        </div>
+        <div class="carousel-item" data-interval="100">
+            <img src="~/Upload/slider2..jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Hoşgeldiniz</h5>
+                <p>Gezinmek için lütfen aşağı kaydırın</p>
+            </div>
+        </div>
+        
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="container pb-5">
+    @Html.Partial("_ProductList", Model)
+</div>

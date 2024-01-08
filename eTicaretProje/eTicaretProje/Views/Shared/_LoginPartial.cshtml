@@ -1,0 +1,53 @@
+﻿<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+</style>
+<ul class="navbar-nav my-2 my-lg-0" style="float:right">
+
+    @if (Request.IsAuthenticated)
+    {//true ise kullanıcı kayıt olmuş
+     //kullanıcı adını ve logout linklerini çıkar
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/Account/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                @User.Identity.Name
+            </a>
+
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/Account/Update">Hesap Bilgileri</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/Account/Manage">Şifre</a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="/Account/Logout">Logout</a>
+        </li>
+        if (User.IsInRole("admin"))
+        {
+            <li class="nav-item active">
+                <a class="nav-link" href="/Products">Admin Paneli</a>
+            </li>
+        }
+    }
+    else
+    {
+        //login ve register linkleri çıkar
+        <li class="nav-item active">
+            <a class="nav-link" href="/Account/Login">Login</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/Account/Register">Register</a>
+        </li>
+    }
+
+
+
+
+
+
+</ul>

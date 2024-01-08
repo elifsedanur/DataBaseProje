@@ -1,0 +1,57 @@
+﻿@model IEnumerable<eTicaretProje.Models.UserOrderModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Sipariş Bilgileriniz</h2>
+            <hr />
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Sipariş Numarası</th>
+                        <th>Sipariş Tarihi</th>
+                        <th>Ödeme Yöntemi</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OrderNumber</td>
+                            <td>@item.OrderDate.ToShortDateString()</td>
+                            <td>@item.PaymentMethod</td>
+                            <td>
+                                <i class="fa fa-try" aria-hidden="true"></i>
+                                @item.Total
+                            </td>
+
+                            @if (item.OrderState == eTicaretProje.Entity.EnumOrderState.Waiting)
+                            {
+                                <td>Hazırlanıyor </td>
+
+                            }
+                            else if (item.OrderState == eTicaretProje.Entity.EnumOrderState.InCargo)
+                            {
+                                <td>Kargoya Verildi </td>
+                            }
+                            else
+                            {
+                                <td>Teslim Edildi</td>
+                            }
+                            <td>@Html.ActionLink("Incele", "Details",new {id = item.Id},new {@class="btn btn-primary"})</td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
